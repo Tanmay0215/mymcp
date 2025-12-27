@@ -1,1 +1,4 @@
 fastmcp
+python-dotenv
+requests
+psutil
