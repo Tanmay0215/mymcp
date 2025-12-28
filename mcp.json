@@ -1,0 +1,13 @@
+{
+    "mcpServers": {
+        "mymcp": {
+            "command": "/path/to/your/mymcp/venv/bin/python",
+            "args": [
+                "/path/to/your/mymcp/run_server.py"
+            ],
+            "env": {
+                "PYTHONPATH": "/path/to/your/mymcp"
+            }
+        }
+    }
+}

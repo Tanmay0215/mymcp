@@ -8,11 +8,9 @@ The Model Context Protocol (MCP) is a standardized way to connect LLMs to extern
 
 ## Features
 
-This server demonstrates comprehensive MCP capabilities with **30+ tools** across 6 categories:
+This server provides **essential MCP tools** that extend LLM capabilities with real-world actions:
 
-### 🧮 Math & Basic Tools
-- `add(a, b)` - Add two numbers
-- `multiply(a, b)` - Multiply two numbers
+### 🔧 Basic Utilities
 - `get_current_time()` - Get current timestamp
 - `greet(name, enthusiastic)` - Generate greeting messages
 
@@ -23,19 +21,13 @@ This server demonstrates comprehensive MCP capabilities with **30+ tools** acros
 - `file_exists(path)` - Check if file/directory exists
 - `get_file_size(path)` - Get file size in bytes
 
-### 🔤 String Utilities
-- `reverse_string(text)` - Reverse a string
-- `count_words(text)` - Count words in text
-- `to_uppercase(text)` - Convert to uppercase
-- `to_lowercase(text)` - Convert to lowercase
-- `trim_whitespace(text)` - Remove leading/trailing whitespace
+### 📖 Documentation & Knowledge
+- `search_docs(query, directory)` - Search documentation files for query
+- `summarize_file(path)` - Summarize a documentation file
+- `generate_readme(directory)` - Generate README template
 
-### 📊 Data Processing
-- `parse_json(json_string)` - Parse and format JSON
+### ✅ Validation
 - `validate_email_format(email)` - Validate email format
-- `generate_uuid()` - Generate UUID v4
-- `encode_base64(text)` - Encode to base64
-- `decode_base64(encoded)` - Decode from base64
 
 ### 💻 System Information
 - `get_system_info()` - Get OS, CPU, memory info
@@ -63,6 +55,16 @@ Data sources that LLMs can read:
 Reusable templates for LLM interactions:
 - `summarize_text(text)` - Generate summarization prompts
 - `code_review(code, language)` - Generate code review prompts
+
+> [!NOTE]
+> This server focuses on tools that provide **real capabilities** LLMs cannot do themselves:
+> - File system access
+> - Documentation search and indexing
+> - System information
+> - Network requests
+> - Email sending
+> 
+> Redundant tools (string manipulation, JSON parsing, base64 encoding) have been removed since LLMs can handle these natively.
 
 
 ## Requirements
@@ -116,22 +118,19 @@ To enable email functionality via Gmail SMTP:
 
 ## Running the Server
 
-**Always use the virtual environment** to run the server:
+Run the server using the entry point:
 
 ```bash
-# Option 1: Use the launcher script (recommended)
-./run_server.sh
+# Option 1: Direct Python execution
+./venv/bin/python run_server.py
 
-# Option 2: Use virtual environment Python directly
-./venv/bin/python server.py
-
-# Option 3: Activate venv first, then run
-source venv/bin/activate
-python server.py
+# Option 2: Make it executable and run directly
+chmod +x run_server.py
+./run_server.py
 ```
 
 > [!IMPORTANT]
-> Do NOT run with system Python (e.g., `python3 server.py` or `/opt/homebrew/bin/python3.13 server.py`). FastMCP is only installed in the virtual environment.
+> Always use the virtual environment Python to ensure dependencies are available.
 
 ## Testing the Server
 
@@ -168,19 +167,38 @@ To use this MCP server with Cursor IDE:
 
 3. **Verify** - The server tools and resources will be available to Cursor's AI
 
-See [CURSOR_SETUP.md](file:///Users/tanmay/Developer/mymcp/CURSOR_SETUP.md) for detailed instructions.
-
 ## Project Structure
 
 ```
 mymcp/
-├── server.py              # Main MCP server (30+ tools)
-├── requirements.txt       # Python dependencies
-├── .env.example          # Environment variable template
-├── .env                  # Your credentials (gitignored)
-├── EMAIL_SETUP.md        # Gmail SMTP setup guide
-├── CURSOR_SETUP.md       # Cursor IDE integration guide
-└── README.md             # This file
+├── src/
+│   └── mymcp/              # Main package
+│       ├── __init__.py     # Package exports
+│       ├── server.py       # Server initialization
+│       ├── config.py       # Environment & settings
+│       ├── tools/          # Tool modules
+│       │   ├── __init__.py
+│       │   ├── basic.py    # Basic utilities
+│       │   ├── files.py    # File operations
+│       │   ├── docs.py     # Documentation tools
+│       │   ├── validation.py # Email validation
+│       │   ├── system.py   # System info
+│       │   ├── web.py      # Web utilities
+│       │   └── email.py    # Email tools
+│       ├── resources/      # Resource modules
+│       │   ├── __init__.py
+│       │   └── info.py     # Server info
+│       └── prompts/        # Prompt modules
+│           ├── __init__.py
+│           └── templates.py
+├── run_server.py           # Entry point
+├── mcp.json                # MCP client configuration
+├── requirements.txt        # Dependencies
+├── .env.example           # Env template
+├── .env                   # Your credentials (gitignored)
+├── EMAIL_SETUP.md         # Gmail setup guide
+├── MCP_SETUP.md           # MCP configuration guide
+└── README.md              # This file
 ```
 
 ## Learn More
@@ -203,11 +221,13 @@ To extend this server further, you can:
 
 | Category | Tools | Description |
 |----------|-------|-------------|
-| 🧮 Math & Basic | 4 | Basic arithmetic and utilities |
+| 🔧 Basic Utilities | 2 | Time and greetings |
 | 📁 File Operations | 5 | Read, write, list files |
-| 🔤 String Utilities | 5 | Text manipulation |
-| 📊 Data Processing | 5 | JSON, base64, UUID, validation |
+| 📖 Documentation | 3 | Search, summarize, generate docs |
+| ✅ Validation | 1 | Email format validation |
 | 💻 System Info | 4 | CPU, memory, disk usage |
 | 🌐 Web Utilities | 3 | HTTP requests, URL parsing |
 | 📧 Email | 3 | Gmail SMTP integration |
-| **Total** | **29** | **Plus resources & prompts** |
+| **Total** | **21** | **Focused on real capabilities** |
+
+**Philosophy**: This server provides only tools that give LLMs **real-world capabilities** they cannot achieve through text generation alone. Redundant tools for string manipulation, JSON parsing, and encoding have been removed.
