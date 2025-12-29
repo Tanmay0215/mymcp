@@ -26,6 +26,14 @@ This server provides **essential MCP tools** that extend LLM capabilities with r
 - `summarize_file(path)` - Summarize a documentation file
 - `generate_readme(directory)` - Generate README template
 
+### 💻 Code Analysis & Integration
+- `update_documentation(directory, doc_file)` - Update existing docs with current codebase info
+- `generate_api_collection(directory, format)` - Generate Postman or Swagger/OpenAPI collection
+- `generate_integration_doc(directory, output_file)` - Generate integration documentation for frontend-backend integration
+- `analyze_api_endpoints(directory)` - Analyze and list all API endpoints in codebase
+- `extract_data_models(directory)` - Extract data models and schemas
+- `generate_api_client_stub(directory, language)` - Generate API client stub (TypeScript/Python/JavaScript)
+
 ### ✅ Validation
 - `validate_email_format(email)` - Validate email format
 
@@ -65,6 +73,9 @@ Reusable templates for LLM interactions:
 > - Email sending
 > 
 > Redundant tools (string manipulation, JSON parsing, base64 encoding) have been removed since LLMs can handle these natively.
+
+> [!TIP]
+> See [`tools.json`](tools.json) for a complete catalog of all tools with detailed parameter descriptions.
 
 
 ## Requirements
@@ -181,6 +192,7 @@ mymcp/
 │       │   ├── basic.py    # Basic utilities
 │       │   ├── files.py    # File operations
 │       │   ├── docs.py     # Documentation tools
+│       │   ├── code.py     # Code analysis & integration
 │       │   ├── validation.py # Email validation
 │       │   ├── system.py   # System info
 │       │   ├── web.py      # Web utilities
@@ -193,6 +205,7 @@ mymcp/
 │           └── templates.py
 ├── run_server.py           # Entry point
 ├── mcp.json                # MCP client configuration
+├── tools.json              # Tool catalog with descriptions
 ├── requirements.txt        # Dependencies
 ├── .env.example           # Env template
 ├── .env                   # Your credentials (gitignored)
@@ -224,10 +237,11 @@ To extend this server further, you can:
 | 🔧 Basic Utilities | 2 | Time and greetings |
 | 📁 File Operations | 5 | Read, write, list files |
 | 📖 Documentation | 3 | Search, summarize, generate docs |
+| 💻 Code Analysis | 6 | Integration docs, API analysis, Postman/Swagger generation |
 | ✅ Validation | 1 | Email format validation |
 | 💻 System Info | 4 | CPU, memory, disk usage |
 | 🌐 Web Utilities | 3 | HTTP requests, URL parsing |
 | 📧 Email | 3 | Gmail SMTP integration |
-| **Total** | **21** | **Focused on real capabilities** |
+| **Total** | **27** | **Focused on real capabilities** |
 
 **Philosophy**: This server provides only tools that give LLMs **real-world capabilities** they cannot achieve through text generation alone. Redundant tools for string manipulation, JSON parsing, and encoding have been removed.

@@ -1,0 +1,454 @@
+{
+    "tools": [
+        {
+            "category": "Basic Utilities",
+            "tools": [
+                {
+                    "name": "get_current_time",
+                    "description": "Get the current date and time",
+                    "parameters": [],
+                    "returns": "Current timestamp as a formatted string"
+                },
+                {
+                    "name": "greet",
+                    "description": "Generate a greeting message",
+                    "parameters": [
+                        {
+                            "name": "name",
+                            "type": "string",
+                            "description": "Name of the person to greet"
+                        },
+                        {
+                            "name": "enthusiastic",
+                            "type": "boolean",
+                            "description": "Whether to add extra enthusiasm",
+                            "optional": true,
+                            "default": false
+                        }
+                    ],
+                    "returns": "A greeting message"
+                }
+            ]
+        },
+        {
+            "category": "File Operations",
+            "tools": [
+                {
+                    "name": "read_file",
+                    "description": "Read the contents of a file",
+                    "parameters": [
+                        {
+                            "name": "path",
+                            "type": "string",
+                            "description": "Path to the file to read"
+                        }
+                    ],
+                    "returns": "File contents as a string"
+                },
+                {
+                    "name": "write_file",
+                    "description": "Write content to a file",
+                    "parameters": [
+                        {
+                            "name": "path",
+                            "type": "string",
+                            "description": "Path to the file to write"
+                        },
+                        {
+                            "name": "content",
+                            "type": "string",
+                            "description": "Content to write to the file"
+                        }
+                    ],
+                    "returns": "Success message or error"
+                },
+                {
+                    "name": "list_directory",
+                    "description": "List contents of a directory",
+                    "parameters": [
+                        {
+                            "name": "path",
+                            "type": "string",
+                            "description": "Path to the directory",
+                            "optional": true,
+                            "default": "."
+                        }
+                    ],
+                    "returns": "List of files and directories"
+                },
+                {
+                    "name": "file_exists",
+                    "description": "Check if a file or directory exists",
+                    "parameters": [
+                        {
+                            "name": "path",
+                            "type": "string",
+                            "description": "Path to check"
+                        }
+                    ],
+                    "returns": "True if exists, False otherwise"
+                },
+                {
+                    "name": "get_file_size",
+                    "description": "Get the size of a file in bytes",
+                    "parameters": [
+                        {
+                            "name": "path",
+                            "type": "string",
+                            "description": "Path to the file"
+                        }
+                    ],
+                    "returns": "File size in bytes or error message"
+                }
+            ]
+        },
+        {
+            "category": "Documentation & Knowledge",
+            "tools": [
+                {
+                    "name": "search_docs",
+                    "description": "Search for documentation files containing the query",
+                    "parameters": [
+                        {
+                            "name": "query",
+                            "type": "string",
+                            "description": "Search term to look for"
+                        },
+                        {
+                            "name": "directory",
+                            "type": "string",
+                            "description": "Directory to search in",
+                            "optional": true,
+                            "default": "."
+                        }
+                    ],
+                    "returns": "List of matching files with snippets"
+                },
+                {
+                    "name": "summarize_file",
+                    "description": "Summarize a documentation file",
+                    "parameters": [
+                        {
+                            "name": "path",
+                            "type": "string",
+                            "description": "Path to the file to summarize"
+                        }
+                    ],
+                    "returns": "Summary of the file including headers and key sections"
+                },
+                {
+                    "name": "generate_readme",
+                    "description": "Generate a README.md template for a directory",
+                    "parameters": [
+                        {
+                            "name": "directory",
+                            "type": "string",
+                            "description": "Directory to generate README for",
+                            "optional": true,
+                            "default": "."
+                        }
+                    ],
+                    "returns": "Generated README content"
+                }
+            ]
+        },
+        {
+            "category": "Code Analysis & Integration",
+            "tools": [
+                {
+                    "name": "update_documentation",
+                    "description": "Update existing documentation with current codebase information",
+                    "parameters": [
+                        {
+                            "name": "directory",
+                            "type": "string",
+                            "description": "Directory to analyze",
+                            "optional": true,
+                            "default": "."
+                        },
+                        {
+                            "name": "doc_file",
+                            "type": "string",
+                            "description": "Documentation file to update",
+                            "optional": true,
+                            "default": "README.md"
+                        }
+                    ],
+                    "returns": "Updated documentation with API endpoints and dependencies sections"
+                },
+                {
+                    "name": "generate_api_collection",
+                    "description": "Generate Postman or Swagger/OpenAPI collection from codebase",
+                    "parameters": [
+                        {
+                            "name": "directory",
+                            "type": "string",
+                            "description": "Directory to analyze",
+                            "optional": true,
+                            "default": "."
+                        },
+                        {
+                            "name": "format",
+                            "type": "string",
+                            "description": "Output format (postman, swagger, auto)",
+                            "optional": true,
+                            "default": "auto"
+                        }
+                    ],
+                    "returns": "Generated Postman collection (JSON) or Swagger/OpenAPI spec (YAML)"
+                },
+                {
+                    "name": "generate_integration_doc",
+                    "description": "Generate integration documentation for a codebase (frontend-backend or service-to-service)",
+                    "parameters": [
+                        {
+                            "name": "directory",
+                            "type": "string",
+                            "description": "Directory to analyze",
+                            "optional": true,
+                            "default": "."
+                        },
+                        {
+                            "name": "output_file",
+                            "type": "string",
+                            "description": "Output file name",
+                            "optional": true,
+                            "default": "INTEGRATION.md"
+                        }
+                    ],
+                    "returns": "Generated integration documentation with API endpoints, data models, and integration guide"
+                },
+                {
+                    "name": "analyze_api_endpoints",
+                    "description": "Analyze and list all API endpoints in the codebase",
+                    "parameters": [
+                        {
+                            "name": "directory",
+                            "type": "string",
+                            "description": "Directory to analyze",
+                            "optional": true,
+                            "default": "."
+                        }
+                    ],
+                    "returns": "List of API endpoints with HTTP methods and paths"
+                },
+                {
+                    "name": "extract_data_models",
+                    "description": "Extract data models and schemas from the codebase",
+                    "parameters": [
+                        {
+                            "name": "directory",
+                            "type": "string",
+                            "description": "Directory to analyze",
+                            "optional": true,
+                            "default": "."
+                        }
+                    ],
+                    "returns": "List of data models with their fields"
+                },
+                {
+                    "name": "generate_api_client_stub",
+                    "description": "Generate API client stub code based on detected endpoints",
+                    "parameters": [
+                        {
+                            "name": "directory",
+                            "type": "string",
+                            "description": "Directory to analyze",
+                            "optional": true,
+                            "default": "."
+                        },
+                        {
+                            "name": "language",
+                            "type": "string",
+                            "description": "Target language (typescript, python, javascript)",
+                            "optional": true,
+                            "default": "typescript"
+                        }
+                    ],
+                    "returns": "Generated API client stub code"
+                }
+            ]
+        },
+        {
+            "category": "Validation",
+            "tools": [
+                {
+                    "name": "validate_email_format",
+                    "description": "Validate email address format",
+                    "parameters": [
+                        {
+                            "name": "email",
+                            "type": "string",
+                            "description": "Email address to validate"
+                        }
+                    ],
+                    "returns": "True if valid format, False otherwise"
+                }
+            ]
+        },
+        {
+            "category": "System Information",
+            "tools": [
+                {
+                    "name": "get_system_info",
+                    "description": "Get system information (OS, CPU, memory)",
+                    "parameters": [],
+                    "returns": "Dictionary with system information"
+                },
+                {
+                    "name": "get_disk_usage",
+                    "description": "Get disk usage statistics for a path",
+                    "parameters": [
+                        {
+                            "name": "path",
+                            "type": "string",
+                            "description": "Path to check",
+                            "optional": true,
+                            "default": "/"
+                        }
+                    ],
+                    "returns": "Dictionary with disk usage info"
+                },
+                {
+                    "name": "get_cpu_percent",
+                    "description": "Get current CPU usage percentage",
+                    "parameters": [],
+                    "returns": "CPU usage percentage"
+                },
+                {
+                    "name": "get_memory_info",
+                    "description": "Get detailed memory usage information",
+                    "parameters": [],
+                    "returns": "Dictionary with memory info"
+                }
+            ]
+        },
+        {
+            "category": "Web Utilities",
+            "tools": [
+                {
+                    "name": "fetch_url",
+                    "description": "Fetch content from a URL",
+                    "parameters": [
+                        {
+                            "name": "url",
+                            "type": "string",
+                            "description": "URL to fetch"
+                        }
+                    ],
+                    "returns": "Response text (first 1000 chars) or error message"
+                },
+                {
+                    "name": "check_url_status",
+                    "description": "Check if a URL is accessible and get status code",
+                    "parameters": [
+                        {
+                            "name": "url",
+                            "type": "string",
+                            "description": "URL to check"
+                        }
+                    ],
+                    "returns": "Dictionary with status info"
+                },
+                {
+                    "name": "extract_domain",
+                    "description": "Extract domain from a URL",
+                    "parameters": [
+                        {
+                            "name": "url",
+                            "type": "string",
+                            "description": "URL to extract domain from"
+                        }
+                    ],
+                    "returns": "Domain name"
+                }
+            ]
+        },
+        {
+            "category": "Email (Gmail SMTP)",
+            "tools": [
+                {
+                    "name": "send_email",
+                    "description": "Send an email via Gmail SMTP",
+                    "parameters": [
+                        {
+                            "name": "to",
+                            "type": "string",
+                            "description": "Recipient email address"
+                        },
+                        {
+                            "name": "subject",
+                            "type": "string",
+                            "description": "Email subject"
+                        },
+                        {
+                            "name": "body",
+                            "type": "string",
+                            "description": "Email body content"
+                        },
+                        {
+                            "name": "html",
+                            "type": "boolean",
+                            "description": "Whether body is HTML",
+                            "optional": true,
+                            "default": false
+                        }
+                    ],
+                    "returns": "Success message or error",
+                    "requires_config": true
+                },
+                {
+                    "name": "send_email_with_attachment",
+                    "description": "Send an email with an attachment via Gmail SMTP",
+                    "parameters": [
+                        {
+                            "name": "to",
+                            "type": "string",
+                            "description": "Recipient email address"
+                        },
+                        {
+                            "name": "subject",
+                            "type": "string",
+                            "description": "Email subject"
+                        },
+                        {
+                            "name": "body",
+                            "type": "string",
+                            "description": "Email body content"
+                        },
+                        {
+                            "name": "file_path",
+                            "type": "string",
+                            "description": "Path to file to attach"
+                        }
+                    ],
+                    "returns": "Success message or error",
+                    "requires_config": true
+                },
+                {
+                    "name": "parse_email_address",
+                    "description": "Parse an email address string into name and address components",
+                    "parameters": [
+                        {
+                            "name": "email_string",
+                            "type": "string",
+                            "description": "Email string (e.g., 'John Doe <john@example.com>')"
+                        }
+                    ],
+                    "returns": "Dictionary with name and email"
+                }
+            ]
+        }
+    ],
+    "summary": {
+        "total_tools": 27,
+        "categories": 8,
+        "tools_requiring_config": 2
+    },
+    "notes": [
+        "Email tools require Gmail SMTP configuration in .env file",
+        "See EMAIL_SETUP.md for email configuration instructions",
+        "All file paths should be absolute or relative to the server's working directory",
+        "Code analysis tools support Python, JavaScript, TypeScript, Flask, FastAPI, and Express frameworks"
+    ]
+}
