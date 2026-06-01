@@ -365,7 +365,7 @@
             ]
         },
         {
-            "category": "Email (Gmail SMTP)",
+            "category": "Email (Gmail SMTP & IMAP)",
             "tools": [
                 {
                     "name": "send_email",
@@ -436,19 +436,237 @@
                         }
                     ],
                     "returns": "Dictionary with name and email"
+                },
+                {
+                    "name": "list_emails",
+                    "description": "List the latest emails in a mailbox folder via IMAP",
+                    "parameters": [
+                        {
+                            "name": "limit",
+                            "type": "integer",
+                            "description": "Maximum number of emails to return",
+                            "optional": true,
+                            "default": 10
+                        },
+                        {
+                            "name": "folder",
+                            "type": "string",
+                            "description": "Name of the folder to list",
+                            "optional": true,
+                            "default": "INBOX"
+                        }
+                    ],
+                    "returns": "A formatted text list of the latest emails",
+                    "requires_config": true
+                },
+                {
+                    "name": "search_emails",
+                    "description": "Search emails using IMAP search criteria",
+                    "parameters": [
+                        {
+                            "name": "query",
+                            "type": "string",
+                            "description": "IMAP search criteria string (e.g. 'SUBJECT \"hello\"' or 'FROM \"google\"')"
+                        },
+                        {
+                            "name": "limit",
+                            "type": "integer",
+                            "description": "Maximum number of search results to return",
+                            "optional": true,
+                            "default": 10
+                        },
+                        {
+                            "name": "folder",
+                            "type": "string",
+                            "description": "Name of the folder to search in",
+                            "optional": true,
+                            "default": "INBOX"
+                        }
+                    ],
+                    "returns": "A formatted text list of matching emails",
+                    "requires_config": true
+                },
+                {
+                    "name": "read_email",
+                    "description": "Retrieve and read the full contents of a specific email by its ID",
+                    "parameters": [
+                        {
+                            "name": "email_id",
+                            "type": "string",
+                            "description": "The ID of the email to read"
+                        },
+                        {
+                            "name": "folder",
+                            "type": "string",
+                            "description": "Name of the folder the email belongs to",
+                            "optional": true,
+                            "default": "INBOX"
+                        }
+                    ],
+                    "returns": "The full details of the email (Headers and Body)",
+                    "requires_config": true
+                }
+            ]
+        },
+        {
+            "category": "Data Converters",
+            "tools": [
+                {
+                    "name": "convert_json_to_yaml",
+                    "description": "Convert a JSON string into a formatted YAML string",
+                    "parameters": [
+                        {
+                            "name": "json_string",
+                            "type": "string",
+                            "description": "The JSON formatted string to convert"
+                        }
+                    ],
+                    "returns": "The converted YAML string or an error message"
+                },
+                {
+                    "name": "convert_yaml_to_json",
+                    "description": "Convert a YAML string into a formatted JSON string",
+                    "parameters": [
+                        {
+                            "name": "yaml_string",
+                            "type": "string",
+                            "description": "The YAML formatted string to convert"
+                        },
+                        {
+                            "name": "indent",
+                            "type": "integer",
+                            "description": "JSON output indentation spaces",
+                            "optional": true,
+                            "default": 4
+                        }
+                    ],
+                    "returns": "The converted JSON string or an error message"
+                },
+                {
+                    "name": "convert_csv_to_json",
+                    "description": "Convert CSV tabular data into a structured JSON array string",
+                    "parameters": [
+                        {
+                            "name": "csv_string",
+                            "type": "string",
+                            "description": "The CSV data string"
+                        },
+                        {
+                            "name": "delimiter",
+                            "type": "string",
+                            "description": "The character used to separate fields",
+                            "optional": true,
+                            "default": ","
+                        }
+                    ],
+                    "returns": "A JSON array representation of the CSV rows or an error message"
+                },
+                {
+                    "name": "convert_json_to_csv",
+                    "description": "Convert a JSON array of flat objects into a CSV string",
+                    "parameters": [
+                        {
+                            "name": "json_array_string",
+                            "type": "string",
+                            "description": "A JSON string representing an array of objects"
+                        },
+                        {
+                            "name": "delimiter",
+                            "type": "string",
+                            "description": "The CSV column separator character",
+                            "optional": true,
+                            "default": ","
+                        }
+                    ],
+                    "returns": "The converted CSV string or an error message"
+                }
+            ]
+        },
+        {
+            "category": "Media Operations (ffmpeg)",
+            "tools": [
+                {
+                    "name": "compress_image",
+                    "description": "Compress an image using ffmpeg",
+                    "parameters": [
+                        {
+                            "name": "path",
+                            "type": "string",
+                            "description": "Absolute path to the source image file"
+                        },
+                        {
+                            "name": "target_path",
+                            "type": "string",
+                            "description": "Optional path for the compressed image",
+                            "optional": true
+                        },
+                        {
+                            "name": "quality",
+                            "type": "integer",
+                            "description": "Quality compression level (1-100)",
+                            "optional": true,
+                            "default": 80
+                        },
+                        {
+                            "name": "scale",
+                            "type": "string",
+                            "description": "Optional scale width/height (e.g., '800:-1')",
+                            "optional": true
+                        }
+                    ],
+                    "returns": "A success message with paths and sizes, or an error message"
+                },
+                {
+                    "name": "convert_image_format",
+                    "description": "Convert an image to a different format using ffmpeg",
+                    "parameters": [
+                        {
+                            "name": "path",
+                            "type": "string",
+                            "description": "Absolute path to the source image file"
+                        },
+                        {
+                            "name": "target_format",
+                            "type": "string",
+                            "description": "Target format extension (e.g., 'webp')",
+                            "optional": true,
+                            "default": "webp"
+                        },
+                        {
+                            "name": "quality",
+                            "type": "integer",
+                            "description": "Quality level for compression (1-100)",
+                            "optional": true,
+                            "default": 80
+                        }
+                    ],
+                    "returns": "A success message with paths and sizes, or an error message"
+                },
+                {
+                    "name": "get_media_metadata",
+                    "description": "Get structural metadata of an image, audio, or video file using ffprobe",
+                    "parameters": [
+                        {
+                            "name": "path",
+                            "type": "string",
+                            "description": "Absolute path to the media file"
+                        }
+                    ],
+                    "returns": "A formatted JSON summary of streams and formats"
                 }
             ]
         }
     ],
     "summary": {
-        "total_tools": 27,
-        "categories": 8,
-        "tools_requiring_config": 2
+        "total_tools": 37,
+        "categories": 10,
+        "tools_requiring_config": 5
     },
     "notes": [
-        "Email tools require Gmail SMTP configuration in .env file",
+        "Email tools require Gmail SMTP and IMAP configuration in .env file",
         "See EMAIL_SETUP.md for email configuration instructions",
         "All file paths should be absolute or relative to the server's working directory",
-        "Code analysis tools support Python, JavaScript, TypeScript, Flask, FastAPI, and Express frameworks"
+        "Code analysis tools support Python, JavaScript, TypeScript, Flask, FastAPI, and Express frameworks",
+        "Media tools require ffmpeg and ffprobe command line utilities to be installed and available on your system path"
     ]
 }

@@ -2,7 +2,7 @@
 Tool registration module.
 """
 
-from . import basic, files, validation, system, web, email, docs, code
+from . import basic, files, validation, system, web, email, docs, code, data_converter, media
 
 
 def register_all_tools(mcp):
@@ -15,3 +15,6 @@ def register_all_tools(mcp):
     email.register_tools(mcp)
     docs.register_tools(mcp)
     code.register_tools(mcp)
+    data_converter.register_tools(mcp)
+    media.register_tools(mcp)
+

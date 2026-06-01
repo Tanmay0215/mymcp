@@ -17,3 +17,14 @@ def get_gmail_config():
         "smtp_server": os.getenv("SMTP_SERVER", "smtp.gmail.com"),
         "smtp_port": int(os.getenv("SMTP_PORT", "587"))
     }
+
+
+def get_gmail_imap_config():
+    """Get Gmail IMAP configuration from environment variables."""
+    return {
+        "user": os.getenv("GMAIL_USER"),
+        "password": os.getenv("GMAIL_APP_PASSWORD"),
+        "imap_server": os.getenv("IMAP_SERVER", "imap.gmail.com"),
+        "imap_port": int(os.getenv("IMAP_PORT", "993"))
+    }
+
